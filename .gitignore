@@ -1,3 +1,4 @@
 node_modules
-./dist
-yarn*
+dist
+/yarn.lock
+*.log
