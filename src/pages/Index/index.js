@@ -1,4 +1,4 @@
-import { helloworld } from './helloworld';
+import { helloworld } from '../../components/helloworld';
 let a = 1;
 (() => {
     console.log(123)

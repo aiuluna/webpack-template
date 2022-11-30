@@ -6,13 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-
+const { entry, htmlWebpackPlugins } = require('./entryConfigs');
 
 module.exports = {
-	entry: {
-		index: './src/index.js',
-		search: './src/search.js',
-	},
+	entry,
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: '[name].[chunkhash:8].js',
@@ -75,18 +72,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name][contenthash:8].css'
 		}),
-		new HtmlWebpackPlugin({
-			template: path.join(__dirname, 'index.html'),
-			filename: 'index.html',
-			inject: true,
-			minify: {
-				html5: true,
-				collapseWhitespace: true,
-				preserveLineBreaks: false,
-				minifyCSS: true,
-				minifyJS: true,
-				removeComments: false
-			}
-		})
+		...htmlWebpackPlugins
 	]
 }

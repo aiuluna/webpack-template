@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom';
-import marry from '../resources/imgs/marry.jpeg'
+import marry from '../../../resources/imgs/marry.jpeg'
 
 
 import './search.less'
