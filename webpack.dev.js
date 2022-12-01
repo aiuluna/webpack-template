@@ -1,17 +1,16 @@
 const path = require('path')
 const webpack = require('webpack')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { entry, htmlWebpackPlugins } = require('./entryConfigs');
 
 module.exports = {
-	entry: {
-		index: './src/index.js',
-		search: './src/search.js',
-	},
+	entry,
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: '[name].[chunkhash:8].js',
 	},
 	mode: 'development',
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
@@ -20,7 +19,14 @@ module.exports = {
 			},
 			{
 				test: /\.(css|less)$/,
-				use: ['style-loader', 'css-loader', 'less-loader'],
+				use: ['style-loader', 'css-loader', 'less-loader',
+					{
+						loader: 'px2rem-loader',
+						options: {
+							remUnit: 75,
+							remPrecision: 8
+						}
+					}],
 			},
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
@@ -38,7 +44,8 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+		...htmlWebpackPlugins
 	],
 	devServer: {
 		static: {

@@ -5,4 +5,5 @@ let a = 1;
     a=2;
     console.log(a)
 })()
+console.log(helloworld())
 document.write(helloworld(), a);
